@@ -9,21 +9,23 @@ class CLI
     puts "If you want assistance, please type help into the terminal."
     puts "If you want to search for movie reviews, please type search into the terminal."
     puts "If you would like to exit the CLI, please type exit"
-    user_response = gets.chomp
-    if user_response == "help"
+    user.user_input = gets.chomp
+    if user.user_input == "help"
       puts "Here is where we help you"
-    elsif user_response == "search"
+      self.get_user_input(user)
+    elsif user.user_input == "search"
       self.get_movie_choice(user)
-    elsif user_response == "exit"
+    elsif user.user_input == "exit"
       puts "Here is where you exit"
     else
       puts "Sorry, didn't quite get that"
+      self.get_user_input(user)
     end
   end
 
   def get_movie_choice(user)
     puts "What movie do you want to search for?"
-    user_response_response = gets.chomp
+    user_response = gets.chomp
     user.movie_search_terms = user_response
     user.past_searches.push(user_response)
   end
