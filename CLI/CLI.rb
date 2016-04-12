@@ -1,8 +1,10 @@
 class CLI
-  attr_accessor :user_response
+  attr_accessor :current_user, :current_api_communicator, :review_array
 
   def welcome
     puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
+    current_user = User.new
+    self.get_user_input(current_user)
   end
 
   def get_user_input(user)
@@ -11,12 +13,11 @@ class CLI
     puts "If you would like to exit the CLI, please type exit"
     user.user_input = gets.chomp
     if user.user_input == "help"
-      puts "Here is where we help you"
       self.get_user_input(user)
     elsif user.user_input == "search"
       self.get_movie_choice(user)
     elsif user.user_input == "exit"
-      puts "Here is where you exit"
+      puts "Bye!"
     else
       puts "Sorry, didn't quite get that"
       self.get_user_input(user)
@@ -25,9 +26,14 @@ class CLI
 
   def get_movie_choice(user)
     puts "What movie do you want to search for?"
-    user_response = gets.chomp
-    user.movie_search_terms = user_response
-    user.past_searches.push(user_response)
+    user.movie_search_terms = gets.chomp
+    self.current_api_communicator = APICommunicator.new(user)
+    self.get_reviews_from_api_communicator
+  end
+
+  def get_reviews_from_api_communicator
+    self.review_array = current_api_communicator.get_data
+    self.confirm_movie_selection(review_array)
   end
 
   def confirm_movie_selection(review_array)

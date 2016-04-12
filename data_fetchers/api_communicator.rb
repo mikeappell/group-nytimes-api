@@ -2,8 +2,8 @@ class APICommunicator
 
   attr_accessor :search_params, :raw_data, :parsed_data, :user_query, :results_offset
   
-  def initialize(user_query)
-    @user_query = user_query.tr(" ", "+")
+  def initialize(user)
+    @user_query = user.movie_search_terms.tr(" ", "+")
     @results_offset = 0
   end
 
@@ -36,7 +36,7 @@ class APICommunicator
       # binding.pry
     end
 
-    var = results_array.flatten.collect { |entry| Review.new(entry) }
+    results_array.flatten.collect { |entry| Review.new(entry) }
     # binding.pry
   end
   
