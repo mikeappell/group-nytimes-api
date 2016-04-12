@@ -1,6 +1,5 @@
 class CLI
 
-  
   def welcome
     puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
   end
@@ -12,4 +11,9 @@ class CLI
     user.past_searches.push(response)
   end
 
+  def confirm_selection(review_array)
+    puts "Cool. Here's a list of movies that fit that description."
+    puts "Which one of these is the movie you're looking for?"
+    puts "Enter the number next to the movie"
+  end
 end
