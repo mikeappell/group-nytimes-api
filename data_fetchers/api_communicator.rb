@@ -1,7 +1,3 @@
-require 'rest-client'
-require 'pry'
-require 'JSON'
-
 class APICommunicator
 
   attr_accessor :search_params, :raw_data, :parsed_data, :user_query, :results_offset

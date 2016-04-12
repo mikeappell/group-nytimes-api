@@ -33,18 +33,18 @@ class CLI
       review_array.first.stringify_attributes
       self.scrape_review? 
     else
-    puts ""  
-    puts "Cool. Here's a list of movies that fit that description."
-    puts "Which one of these is the movie you're looking for?"
-    puts ""
-    puts "Enter the number next to the movie:"
-    puts ""
-    review_array.each_with_index {|review, index| puts "#{index+1}. #{review.display_title}"}
-      end
-
+      puts ""  
+      puts "Cool. Here's a list of movies that fit that description."
+      puts "Which one of these is the movie you're looking for?"
+      puts ""
+      puts "Enter the number next to the movie:"
+      puts ""
+      review_array.each_with_index {|review, index| puts "#{index+1}. #{review.display_title}"}
     end
 
-   def scrape_review?
+  end
+
+  def scrape_review?
     puts ""
     puts "I can also get you the full review by using a web scraper called Nokogiri."
     puts ""
@@ -55,4 +55,4 @@ class CLI
 
 
 
-  end
+end
