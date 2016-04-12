@@ -12,17 +12,20 @@ class CLI
     user_response = gets.chomp
     if user_response == "help"
       puts "Here is where we help you"
-    elsif user_response == 
-
-    
-
-
+    elsif user_response == "search"
+      self.get_movie_choice(user)
+    elsif user_response == "exit"
+      puts "Here is where you exit"
+    else
+      puts "Sorry, didn't quite get that"
+    end
+  end
 
   def get_movie_choice(user)
     puts "What movie do you want to search for?"
     user_response_response = gets.chomp
-    user.search_terms = response
-    user.past_searches.push(response)
+    user.movie_search_terms = user_response
+    user.past_searches.push(user_response)
   end
 
   def confirm_movie_selection(review_array)
