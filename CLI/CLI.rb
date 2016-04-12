@@ -3,7 +3,7 @@ class CLI
 
   def welcome
     puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
-    current_user = User.new
+    self.current_user = User.new
     self.get_user_input(current_user)
   end
 
@@ -30,7 +30,7 @@ class CLI
 
   def get_movie_choice(user)
     puts "What movie do you want to search for?"
-    user.movie_search_terms = gets.chomp
+    current_user.movie_search_terms = gets.chomp
     self.current_api_communicator = APICommunicator.new(user)
     self.get_reviews_from_api_communicator
   end
@@ -60,15 +60,16 @@ class CLI
     puts ""
     puts "I can also get you the full review by using a web scraper called Nokogiri."
     puts ""
-    puts "Press Y and enter to get the review, or N and enter to go back to the terminal"
-    user.user_input = gets.chomp.downcase
-    if user.user_input == "y"
+    puts "Press Y and enter to get the review, or N and enter to search for another movie"
+    current_user.user_input = gets.chomp.downcase
+    if current_user.user_input == "y"
       puts "Here is where we scrape the web with Nokogiri"
-    elsif user.user_input == "n"
+    elsif current_user.user_input == "n"
       self.get_user_input
     else
       puts "Sorry didn't quite get that"
       self.scrape_review?
+    end
   end
 
 end
