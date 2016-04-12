@@ -7,11 +7,15 @@ class CLI
     self.get_user_input(current_user)
   end
 
-  def get_user_input(user)
+  def help
     puts "If you want assistance, please type help into the terminal."
     puts "If you want to search for movie reviews, please type search into the terminal."
     puts "If you would like to exit the CLI, please type exit"
-    user.user_input = gets.chomp
+  end
+
+  def get_user_input(user)
+    help
+    user.user_input = gets.chomp.downcase
     if user.user_input == "help"
       self.get_user_input(user)
     elsif user.user_input == "search"
@@ -57,10 +61,14 @@ class CLI
     puts "I can also get you the full review by using a web scraper called Nokogiri."
     puts ""
     puts "Press Y and enter to get the review, or N and enter to go back to the terminal"
+    user.user_input = gets.chomp.downcase
+    if user.user_input == "y"
+      puts "Here is where we scrape the web with Nokogiri"
+    elsif user.user_input == "n"
+      self.get_user_input
+    else
+      puts "Sorry didn't quite get that"
+      self.scrape_review?
   end
-
-
-
-
 
 end
