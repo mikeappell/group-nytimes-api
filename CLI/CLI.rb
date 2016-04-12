@@ -15,4 +15,5 @@ class CLI
     puts "Cool. Here's a list of movies that fit that description."
     puts "Which one of these is the movie you're looking for?"
     puts "Enter the number next to the movie"
+  end
 end
