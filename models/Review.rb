@@ -8,4 +8,19 @@ class Review
     end
   end
 
+  def capitalize_attribute(attribute)
+#attribute.split("_").map {|element| element.capitalize}.join(" ")
+  end
+
+  def stringify_attributes
+    puts ""
+    puts "Title: #{display_title}"
+    puts "Review by: #{byline}"
+    if critics_pick == 1
+      puts "*CRITICS PICK*"
+    end
+    puts "MPAA Rating: #{mpaa_rating}"
+    puts "Summary: #{summary_short}"
+  end
+
 end
