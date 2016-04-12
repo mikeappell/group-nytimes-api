@@ -5,8 +5,8 @@ require 'JSON'
 def import_data
 
  apikey = "0fa7004e9139a09e1423bd884a8947c9:18:62278142" # This isn't going to change.
- query = "big" # This is the general search parameter. Put single quotes around it to make it exact.
- 
+ query = "'big'" # This is the general search parameter. Put single quotes around it to make it exact.
+
  request = {params: {query: query, "api-key" => apikey}}
 
  # return_value = RestClient.get("http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=big&api-key=0fa7004e9139a09e1423bd884a8947c9:18:62278142")
