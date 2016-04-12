@@ -6,7 +6,14 @@ class CLI
   end
 
   def get_user_input(user)
-    if 
+    puts "If you want assistance, please type help into the terminal."
+    puts "If you want to search for movie reviews, please type search into the terminal."
+    puts "If you would like to exit the CLI, please type exit"
+    user_response = gets.chomp
+    if user_response == "help"
+      puts "Here is where we help you"
+    elsif user_response == 
+
     
 
 
