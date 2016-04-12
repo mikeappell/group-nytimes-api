@@ -6,8 +6,4 @@ class User
       @past_searches = []
     end
 
-    def send_search_terms_to_api_communicator
-
-    end
-
 end
