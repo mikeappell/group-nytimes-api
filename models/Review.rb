@@ -8,10 +8,6 @@ class Review
     end
   end
 
-  def capitalize_attribute(attribute)
-#attribute.split("_").map {|element| element.capitalize}.join(" ")
-  end
-
   def stringify_attributes
     puts ""
     puts "Title: #{display_title}"

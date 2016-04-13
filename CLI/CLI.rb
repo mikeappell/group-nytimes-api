@@ -1,5 +1,6 @@
 class CLI
   attr_accessor :current_user, :current_api_communicator
+  include Textable
 
   def welcome
     puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
@@ -16,6 +17,7 @@ class CLI
       self.get_movie_choice
     elsif current_user.user_input == "exit"
       puts "Bye!"
+      self.flatiron_heart
     else
       puts "Sorry, didn't quite get that"
       self.get_user_input
