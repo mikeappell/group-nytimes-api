@@ -4,7 +4,7 @@ class CLI
   include Textable
   
   def welcome
-    puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
+    puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!\n"
     self.current_user = User.new
     self.help
     self.get_user_input
