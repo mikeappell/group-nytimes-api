@@ -12,7 +12,7 @@ class CLI
     current_user.user_input = gets.chomp.downcase
     if current_user.user_input == "help"
       self.get_user_input
-    elsif current_user.user_input == "search"
+    elsif current_user.user_input == "search" || current_user.user_input == "search exact"
       self.get_movie_choice
     elsif current_user.user_input == "exit"
       puts "Bye!"
@@ -23,21 +23,26 @@ class CLI
   end
 
   def help
-    puts "If you want assistance, please type help into the terminal."
-    puts "If you want to search for movie reviews, please type search into the terminal."
-    puts "If you would like to exit the CLI, please type exit"
+    puts "If you want assistance, please type 'help' into the terminal."
+    puts "If you want to search for movie reviews:\n\t\tPlease type into the terminal 'search' to search for names like that title,\n\t\tOr 'search exact' for that exact title."
+    puts "If you would like to exit the CLI, please type 'exit'."
   end
 
   def get_movie_choice
     puts "What movie do you want to search for?"
     current_user.movie_search_terms = gets.chomp
-    self.current_api_communicator = APICommunicator.new(current_user)
-    self.get_reviews_from_api_communicator
+    if current_user.movie_search_terms == ""
+      puts "Sorry, didn't get that. Try again?"
+      self.get_movie_choice
+    else
+      self.current_api_communicator = APICommunicator.new(current_user)
+      self.get_reviews_from_api_communicator
+    end
   end
 
   def get_reviews_from_api_communicator
     review_array = current_api_communicator.get_data
-    self.confirm_movie_selection(review_array)
+    current_user.user_input == "search exact" ? self.confirm_movie_selection(review_array) : display_and_format_movie_array(review_array)
   end
 
   def confirm_movie_selection(review_array)
@@ -69,12 +74,22 @@ class CLI
       if index % 2 == 0 then print "%-100.100s" % "#{index+1}. #{review.display_title}"
       else puts "#{index + 1}. #{review.display_title}"
       end
-      if (index + 1) % 98 == 0 || index + 1 == review_array.size
-        puts "\nEnter the number next to the movie, or hit enter to show the next 100."
+      if (index + 1) % 98 == 0
+        puts "\nPlease enter the number next to the movie, or hit enter to show the next 100."
         choice = gets
         if choice.match(/\d+/)
           display_single_movie(review_array[choice.to_i - 1]) 
           break
+        end
+      elsif index + 1 == review_array.size
+        puts "\nPlease enter the number next to the movie."
+        choice = gets
+        if choice.match(/\d+/)
+          display_single_movie(review_array[choice.to_i - 1]) 
+          break
+        else
+          puts "Ok, none of the above? Going back to the index then."
+          self.get_user_input
         end
       end
     end 
