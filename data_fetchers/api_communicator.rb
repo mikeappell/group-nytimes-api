@@ -11,7 +11,6 @@ class APICommunicator
     movie_base = "http://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     api_key = "api-key=0fa7004e9139a09e1423bd884a8947c9:18:62278142"
     # api_key = "api-key=sample-key"
-    # interpreted_string = user_query.tr(" ", "+")
     self.search_params = "#{movie_base}#{user_query}&offset=#{results_offset}&#{api_key}"
   end
 

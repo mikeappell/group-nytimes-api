@@ -1,6 +1,7 @@
 class User
   
-  attr_accessor :user_input, :movie_search_terms, :past_searches, :review
+  attr_accessor :user_input, :past_searches, :review
+  attr_reader :movie_search_terms
 
     def initialize
       @past_searches = []
