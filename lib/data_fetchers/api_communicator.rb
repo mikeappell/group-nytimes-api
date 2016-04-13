@@ -3,7 +3,7 @@ class APICommunicator
   attr_accessor :search_params, :raw_data, :parsed_data, :user_query, :results_offset
   
   def initialize(user)
-    @user_query = user.movie_search_terms.tr(" ", "+")
+    @user_query = user.user_input.tr(" ", "+")
     @results_offset = 0
   end
 
