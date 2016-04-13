@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
-gem 'pry'
-gem 'nokogiri'
-gem 'rest-client'
-gem 'colorize'
+gem "colorize"
+gem "pry"
+gem "nokogiri"
+gem "rest-client"
+

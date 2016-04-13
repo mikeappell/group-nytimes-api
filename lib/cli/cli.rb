@@ -4,7 +4,7 @@ class CLI
   include Textable
   
   def welcome
-    puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
+    puts "\nHello, welcome to Justin and Mike's NYT Movie Review CLI!\n\n"
     self.current_user = User.new
     self.help
     self.get_user_input
@@ -62,13 +62,13 @@ class CLI
     elsif review_array.size == 1
       self.display_single_movie(review_array[0])
     elsif exact_search
-      exact_search_result = review_array.detect { |review| review.display_title.downcase == current_user.user_input.downcase }
-      if exact_search_result.nil?
+      single_review = review_array.detect { |review| review.display_title.downcase == current_user.user_input.downcase }
+      if single_review.nil?
         puts "Sorry, we didn't find an exact result. Please try again.\n\n"
         self.help
         self.get_user_input
       else
-        self.display_single_movie(review_array)
+        self.display_single_movie(single_review)
       end
     else
       self.display_and_format_movie_array(review_array)
