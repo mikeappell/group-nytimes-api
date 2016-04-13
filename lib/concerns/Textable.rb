@@ -1,18 +1,18 @@
 module Textable
   def flatiron_heart
-    puts "             ******       ******"             
-    puts "           **********   **********"          
-    puts "         ************* *************               //  //"       
-    puts "        *****************************             //  //"     
-    puts "        *****************************            //  //"     
-    puts "        *****************************           //  //"    
-    puts "         ***************************           //  //"       
-    puts "           ***********************            //  //"          
-    puts "             *******************             //  //"            
-    puts "               ***************"
-    puts "                 ***********             Made with love"
-    puts "                   *******           at the Flatiron School"
-    puts "                     ***                  New York, NY"
-    puts "                      *"
+    puts "             ******       ******".colorize(:light_red)             
+    puts "           **********   **********".colorize(:light_red)          
+    puts "         ************* *************".colorize(:light_red)+"               //  //".colorize(:light_cyan)       
+    puts "        *****************************".colorize(:light_red)+"             //  //".colorize(:light_cyan)     
+    puts "        *****************************".colorize(:light_red)+"            //  //".colorize(:light_cyan)     
+    puts "        *****************************".colorize(:light_red)+"           //  //".colorize(:light_cyan)    
+    puts "         ***************************".colorize(:light_red)+"           //  //".colorize(:light_cyan)       
+    puts "           ***********************".colorize(:light_red)+"            //  //".colorize(:light_cyan)          
+    puts "             *******************".colorize(:light_red)+"             //  //".colorize(:light_cyan)            
+    puts "               ***************".colorize(:light_red)
+    puts "                 ***********".colorize(:light_red)+"             Made with love"
+    puts "                   *******".colorize(:light_red)+"           at the Flatiron School"
+    puts "                     ***".colorize(:light_red)+"                  New York, NY"
+    puts "                      *".colorize(:light_red) 
   end
 end
