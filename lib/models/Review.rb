@@ -8,13 +8,8 @@ class Review
     end
   end
 
-  def capitalize_attribute(attribute)
-#attribute.split("_").map {|element| element.capitalize}.join(" ")
-  end
-
   def stringify_attributes(nytimes_scraper)
     self.director = nytimes_scraper.get_director
-    puts ""
     puts "Title: #{display_title}"
     puts "Review by: #{byline}"
     puts "This movie premiered on #{opening_date}." unless opening_date.nil?
