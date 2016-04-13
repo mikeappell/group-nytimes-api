@@ -5,7 +5,7 @@ class APICommunicator
   
   def initialize(user)
     @api_key = YAML.load_file('application.yml')['API-KEY']
-    @user_query = user.movie_search_terms.tr(" ", "+")
+    @user_query = user.user_input.tr(" ", "+")
     @results_offset = 0
   end
 
@@ -13,7 +13,6 @@ class APICommunicator
     movie_base = "http://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     # api_key = "api-key=sample-key"
     self.search_params = "#{movie_base}#{user_query}&offset=#{results_offset}&api-key=#{api_key}"
-    binding.pry
   end
 
   def get_JSON_file
