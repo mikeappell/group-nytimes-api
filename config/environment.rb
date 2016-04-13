@@ -1,10 +1,10 @@
 require 'bundler/setup'
 Bundler.require
 
+require 'yaml'
 require 'pry'
 require 'nokogiri'
 require 'rest-client'
-require 'yaml'
 require 'colorize'
 
 require_relative "../lib/concerns/Textable.rb"
