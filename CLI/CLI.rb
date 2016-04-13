@@ -8,10 +8,8 @@ class CLI
   end
 
   def get_user_input
-    puts "If you want assistance, please type help into the terminal."
-    puts "If you want to search for movie reviews, please type search into the terminal."
-    puts "If you would like to exit the CLI, please type exit"
-    current_user.user_input = gets.chomp
+    help
+    current_user.user_input = gets.chomp.downcase
     if current_user.user_input == "help"
       self.get_user_input
     elsif current_user.user_input == "search"
@@ -22,6 +20,12 @@ class CLI
       puts "Sorry, didn't quite get that"
       self.get_user_input
     end
+  end
+
+  def help
+    puts "If you want assistance, please type help into the terminal."
+    puts "If you want to search for movie reviews, please type search into the terminal."
+    puts "If you would like to exit the CLI, please type exit"
   end
 
   def get_movie_choice
@@ -55,11 +59,9 @@ class CLI
     self.scrape_review? 
   end
 
-  def display_and_format_movie_array(review_array)
-    puts ""  
-    puts "Cool. Here's a list of movies that fit that description."
-    puts "Which one of these is the movie you're looking for?"
-    puts ""
+  def display_and_format_movie_array(review_array) 
+    puts "\nCool. Here's a list of movies that fit that description."
+    puts "Which one of these is the movie you're looking for?\n"
     review_array.each_with_index do |review, index|
       if index % 2 == 0 then print "%-100.100s" % "#{index+1}. #{review.display_title}"
       else puts "#{index + 1}. #{review.display_title}"
@@ -77,7 +79,16 @@ class CLI
 
   def scrape_review?
     puts "\nI can also get you the full review by using a web scraper called Nokogiri."
-    puts "\nPress Y and enter to get the review, or N and enter to go back to the terminal"
+    puts "Press Y and enter to get the review, or N and enter to search for another movie"
+    current_user.user_input = gets.chomp.downcase
+    if current_user.user_input == "y"
+      puts "Here is where we scrape the web with Nokogiri"
+    elsif current_user.user_input == "n"
+      self.get_user_input
+    else
+      puts "Sorry didn't quite get that"
+      self.scrape_review?
+    end
   end
 
 end
