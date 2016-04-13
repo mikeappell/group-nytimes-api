@@ -4,6 +4,7 @@ Bundler.require
 require 'pry'
 require 'nokogiri'
 require 'rest-client'
+require 'yaml'
 
 require_relative "../CLI/CLI.rb"
 require_relative "../data_fetchers/api_communicator.rb"
