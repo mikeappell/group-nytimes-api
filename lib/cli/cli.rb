@@ -93,13 +93,15 @@ class CLI
         puts "\nPlease enter the number next to the movie, or hit enter to show the next 100."
         choice = gets
         if choice.match(/\d+/)
-          display_single_movie(review_array[choice.to_i - 1]) 
-          break
+          unless choice.to_i > review_array.size
+            display_single_movie(review_array[choice.to_i - 1]) 
+            break
+          end
         end
       elsif index + 1 == review_array.size
         puts "\nPlease enter the number next to the movie."
         choice = gets
-        if choice.match(/\d+/)
+        if choice.match(/\d+/) && choice.to_i <= review_array.size
           display_single_movie(review_array[choice.to_i - 1]) 
           break
         else

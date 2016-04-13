@@ -18,10 +18,6 @@ class NYTimesScraper
         director_text.text.match(/[dD]irected by (.+)/)[1]
       else ""
       end
-      # else
-      #   director_text = scraped_page.css("div#articleBody p").detect { |p| p.text.include?("Directed by") }
-      #   director_text.nil? ? "" : director_text.text.match(/Directed by (.+)/)[1]
-      # end
     end
   end
 

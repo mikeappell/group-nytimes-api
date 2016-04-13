@@ -4,7 +4,8 @@ class APICommunicator
   attr_reader :api_key
   
   def initialize(user)
-    @api_key = "0fa7004e9139a09e1423bd884a8947c9:18:62278142"
+    binding.pry
+    @api_key = YAML.load_file("/Users/flatironschool/Development/code/Day7/group-nytimes-api/lib/data_fetchers/application.yml")["API-KEY"]
     @user_query = user.user_input.tr(" ", "+")
     @results_offset = 0
   end
