@@ -17,12 +17,15 @@ class Review
     puts ""
     puts "Title: #{display_title}"
     puts "Review by: #{byline}"
+    puts "This movie premiered on #{opening_date}." unless opening_date.nil?
+    puts "This review appeared in the Times on #{publication_date}." unless publication_date.nil?
     if critics_pick == 1
       puts "*CRITICS PICK*"
     end
     puts "MPAA Rating: #{mpaa_rating}"
     puts "Directed by #{director}." unless director == ""
-    puts "Summary: #{summary_short.gsub("&quot;", "\"")}"
+    puts "Summary: #{summary_short.gsub("&quot;", "\"")}\n"
+    puts "The review can be read at #{link["url"]}"
   end
 
 end

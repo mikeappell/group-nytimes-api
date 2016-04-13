@@ -42,7 +42,11 @@ class CLI
 
   def get_reviews_from_api_communicator
     review_array = current_api_communicator.get_data
-    current_user.user_input == "search exact" ? self.confirm_movie_selection(review_array) : display_and_format_movie_array(review_array)
+    if current_user.user_input == "search exact"
+      puts "\nWe didn't find an exact match for that movie; here's the closest matches we found.\n"
+      self.confirm_movie_selection(review_array)
+    else display_and_format_movie_array(review_array)
+    end
   end
 
   def confirm_movie_selection(review_array)
@@ -68,7 +72,7 @@ class CLI
   end
 
   def display_and_format_movie_array(review_array)
-    puts "\nCool. Here's a list of movies that fit that description."
+    puts "\nCool. Here's a list of movies that fit that description.\n"
     puts "Which one of these is the movie you're looking for?\n"
     review_array.each_with_index do |review, index|
       if index % 2 == 0 then print "%-100.100s" % "#{index+1}. #{review.display_title}"
@@ -88,7 +92,7 @@ class CLI
           display_single_movie(review_array[choice.to_i - 1]) 
           break
         else
-          puts "Ok, none of the above? Going back to the index then."
+          puts "\nOk, none of the above? Going back to the index then.\n\n"
           self.get_user_input
         end
       end
@@ -98,15 +102,16 @@ class CLI
   def scrape_review(review)
     puts "\nI can also get you the full review by using a web scraper called Nokogiri."
     puts "Press Y and enter to get the review, or N and enter to search for another movie"
-    current_user.user_input = gets.chomp.downcase
-    if current_user.user_input == "y"
+    user_choice = gets.chomp.downcase
+    if user_choice == "y"
       puts "\n#{nytimes_scraper.get_review}\n\n"
       self.get_user_input
-    elsif current_user.user_input == "n"
+    elsif user_choice == "n"
+      puts "\nNo problemo.\n"
       self.get_user_input
     else
       puts "Sorry didn't quite get that"
-      self.scrape_review?
+      self.scrape_review(review)
     end
   end
 
