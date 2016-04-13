@@ -1,5 +1,5 @@
 class CLI
-  attr_accessor :current_user, :current_api_communicator
+  attr_accessor :current_user, :current_api_communicator, :nytimes_scraper
 
   def welcome
     puts "Hello, welcome to Justin and Mike's NYT Movie Review CLI!"
@@ -42,12 +42,14 @@ class CLI
 
   def confirm_movie_selection(review_array)
     if review_array.length == 1
-      binding.pry
       display_single_movie(review_array.first)
     else 
       single_review = review_array.detect { |review| review.display_title.downcase == current_user.movie_search_terms.downcase }
-
-      unless single_review.nil? then display_single_movie(single_review)
+      if !single_review.nil?
+        display_single_movie(single_review)
+      elsif review_array.empty?
+        puts "\nUnfortunately, no movies were found. Please try again.\n\n"
+        self.get_user_input
       else display_and_format_movie_array(review_array)
       end
     end
@@ -55,11 +57,12 @@ class CLI
 
   def display_single_movie(review)
     current_user.review = review
-    review.stringify_attributes
-    self.scrape_review? 
+    self.nytimes_scraper = NYTimesScraper.new(review)
+    review.stringify_attributes(nytimes_scraper)
+    self.scrape_review(review)
   end
 
-  def display_and_format_movie_array(review_array) 
+  def display_and_format_movie_array(review_array)
     puts "\nCool. Here's a list of movies that fit that description."
     puts "Which one of these is the movie you're looking for?\n"
     review_array.each_with_index do |review, index|
@@ -77,12 +80,13 @@ class CLI
     end 
   end
 
-  def scrape_review?
+  def scrape_review(review)
     puts "\nI can also get you the full review by using a web scraper called Nokogiri."
     puts "Press Y and enter to get the review, or N and enter to search for another movie"
     current_user.user_input = gets.chomp.downcase
     if current_user.user_input == "y"
-      puts "Here is where we scrape the web with Nokogiri"
+      puts "\n#{nytimes_scraper.get_review}\n\n"
+      self.get_user_input
     elsif current_user.user_input == "n"
       self.get_user_input
     else
